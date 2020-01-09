@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Reactivities\\Api\\API.csproj": {}
+    "D:\\Reactivities\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Reactivities\\Api\\API.csproj": {
+    "D:\\Reactivities\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Reactivities\\Api\\API.csproj",
+        "projectUniqueName": "D:\\Reactivities\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Reactivities\\Api\\API.csproj",
+        "projectPath": "D:\\Reactivities\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Richi3\\.nuget\\packages\\",
-        "outputPath": "D:\\Reactivities\\Api\\obj\\",
+        "outputPath": "D:\\Reactivities\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
