@@ -1,32 +1,29 @@
-import React, {useContext } from 'react';
-import { Grid, List } from 'semantic-ui-react';
+import React, { useContext, useEffect } from 'react';
+import { Grid } from 'semantic-ui-react';
 import ActivityList from './ActivityList';
-import ActivityDetails from '../details/ActivityDetails';
-import { ActivityFrom } from '../form/ActivityFrom';
 import { observer } from 'mobx-react-lite';
-import ActivityStore from '../../../app/stores/activityStore';
-
-
+import { LoadingComponent } from '../../../app/layout/LoadingComponent';
+import ActivityStore from '../../../app/stores/activityStore'
 
 const ActivityDashboard: React.FC = () => {
+
     const activityStore = useContext(ActivityStore);
-    const {editMode, selectedActivity} = activityStore;
+
+    useEffect(() => {
+      activityStore.loadActivities();
+      // Must declare dependencies in array, activityStore is dependent on the activityStore class
+    }, [activityStore]);
+  
+    if (activityStore.loadingInitial) {
+      return <LoadingComponent content='Loading activities'/>
+    }
     return (
         <Grid>
             <Grid.Column width={10}>
                 <ActivityList />
             </Grid.Column>
             <Grid.Column width={6}>
-                {/* Only show if activty is set */}
-                {selectedActivity && !editMode && (
-                <ActivityDetails/>
-                )}
-                {editMode &&
-                // Check for a selected Activity, if no activity set  activity to null
-                <ActivityFrom 
-                key={selectedActivity && selectedActivity.id || 0}
-                activity={selectedActivity!}/>
-                }   
+                <h2>Activity Filters</h2>
             </Grid.Column>
         </Grid>
     )

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
 import { IActivity } from '../models/activity';
-import { resolve } from 'dns';
 
 // Place to define all API calls
 
