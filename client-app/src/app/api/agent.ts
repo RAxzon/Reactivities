@@ -1,9 +1,30 @@
 import axios, { AxiosResponse } from 'axios'
 import { IActivity } from '../models/activity';
+import { history } from '../..';
+import { configure } from 'mobx';
+import { toast } from 'react-toastify';
 
 // Place to define all API calls
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+axios.interceptors.response.use(undefined, error => {
+    if (error.message === 'Network Error' && !error.response) {
+        toast.error('Network error');
+    }
+    if (error.response.status === 404) {
+        history.push('/notfound');
+    }
+    if (
+        error.response.status === 400 && 
+        error.response.config.method === 'get' && 
+        error.response.data.errors.hasOwnProperty('id')) {
+            history.push('/notfound');
+    }
+    if (error.response.status == 500){
+        toast.error('Server error - consult to terminal');
+    }
+})
 
 const responseBody = (response: AxiosResponse) => response.data;
 

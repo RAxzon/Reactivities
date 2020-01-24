@@ -5,6 +5,8 @@ using Domain;
 using MediatR;
 using Persistance;
 using static Application.Activities.Create;
+using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace Application.Activities
 {
@@ -14,12 +16,27 @@ namespace Application.Activities
         {
 
             public Guid Id { get; set; }
+            [Required]
             public string Title { get; set; }
             public string Description { get; set; }
             public string Category { get; set; }
             public DateTime Date { get; set; }
             public string City { get; set; }
             public string Venue { get; set; }
+        }
+    }
+    
+    public class CommandValidator : AbstractValidator<Command> 
+    {
+        // Add package FulentValidation before use
+        // Almost the same thing as data annotions in model
+        public CommandValidator() {
+            RuleFor(x => x.Title).NotEmpty();
+            RuleFor(x => x.Description).NotEmpty();
+            RuleFor(x => x.Category).NotEmpty();
+            RuleFor(x => x.Date).NotEmpty();
+            RuleFor(x => x.City).NotEmpty();
+            RuleFor(x => x.Venue).NotEmpty();
         }
     }
 

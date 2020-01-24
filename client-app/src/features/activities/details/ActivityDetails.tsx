@@ -13,17 +13,21 @@ interface DetailParams {
     id: string
 }
 
-const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({match}) => {
+const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({match, history}) => {
     const activityStore = useContext(ActivityStore)
     const {activity, loadActivity, loadingInitial} = activityStore;
     // When component is created
     useEffect(() => {
         loadActivity(match.params.id)
         // If left out, this method is going to run in a loop. LoadActivity is the dependecy
-    }, [loadActivity, match.params.id]);
+    }, [loadActivity, match.params.id, history]);
     
-    if(loadingInitial || !activity) return <LoadingComponent content='loading component'/>
- 
+    if(loadingInitial) return <LoadingComponent content='loading component'/>
+    
+    if(!activity) {
+        return <h2>Not Found</h2>
+    }
+
     return (
         <Grid>
             <GridColumn width={10}>
