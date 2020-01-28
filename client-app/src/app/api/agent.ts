@@ -24,6 +24,7 @@ axios.interceptors.response.use(undefined, error => {
     if (error.response.status == 500){
         toast.error('Server error - consult to terminal');
     }
+    throw error;
 })
 
 const responseBody = (response: AxiosResponse) => response.data;
